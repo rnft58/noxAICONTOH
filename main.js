@@ -24,6 +24,14 @@ function displayMessages(chatBox) {
 document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.getElementById("chat-box");
     displayMessages(chatBox);
+
+    // Event listener untuk tombol kirim atau enter key
+    document.getElementById("send-button").addEventListener("click", sendMessage);
+    document.getElementById("user-input").addEventListener("keypress", function (e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
 });
 
 async function sendMessage() {
@@ -60,9 +68,9 @@ async function sendMessage() {
 
         if (greetings.includes(text.toLowerCase())) {
             reply = "Hai, apa kabar? Saya adalah asisten NoxAI siap membantu!<br> jika anda ingin menampilkan opsi ketik * .menu / menu";
-        } else if (["developer kau siapa", "developermu siapa", "siapa pembuatmu", "pembuat kamu siapa", "siapa developermu"].some(q => text.toLowerCase().includes(q))) {
+        } else if (text.toLowerCase().includes("developer kau siapa") || text.toLowerCase().includes("developermu siapa") || text.toLowerCase().includes("siapa pembuatmu") || text.toLowerCase().includes("pembuat kamu siapa") || text.toLowerCase().includes("siapa developermu")) {
             reply = "Saya dibuat oleh rnft, seorang programmer muda, yang pemula";
-        } else if ([".menu", "menu"].some(q => text.toLowerCase().includes(q))) {
+        } else if (text.toLowerCase().includes(".menu") || text.toLowerCase().includes("menu")) {
             reply = "All-Menu👇👇<br>.status :untuk melihat status admin<br>.get-apikey: untuk mendapatkan apikey secara gratis<br>.join-grup :untuk bergabung ke Grups WhatsApp<br>.down-app : download apk/apl";
         } else if (text.toLowerCase().includes(".join-grup")) {
             reply = "Join Grups WhatsApp:<br>`https://chat.whatsapp.com/Gomu4BhzluT3gaXRHmNs4n`";
@@ -72,8 +80,8 @@ async function sendMessage() {
             reply = "APIKEY Gemini:<br> `AIzaSyC0Cjd5U_kIM9tvqxfjjvQ_MlhabjtxA30`";
         } else if (text.toLowerCase().includes(".down-app")) {
             reply = "Download apk ai:<br>`https://github.com/TarnaWijaya/Tarz-AI/releases/tag/Download-Apk`";
-        } else if (["siapa rnft", "who rnft", "rnft"].some(q => text.toLowerCase().includes(q))) {
-            reply = "rnft adalah seorang pemula, dan ingin berlajar pada saat ia gabut";
+        } else if (text.toLowerCase().includes("siapa rnft") || text.toLowerCase().includes("who rnft") || text.toLowerCase().includes("rnft")) {
+            reply = "rnft adalah seorang pemula, dan ingin belajar pada saat ia gabut";
         } else if (["nama", "nama kamu siapa", "siapa namamu", "siapa nama kau", "siapa namakau", "namamu"].includes(text.toLowerCase())) {
             reply = "Nama saya adalah NoxAI, yang dinamakan oleh rnft.";
         } else {
